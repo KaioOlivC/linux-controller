@@ -1,6 +1,6 @@
 # Linux Controller
 
-A gamepad-driven interface for controlling a Linux desktop using an **8BitDo Pro 3 controller**. The goal is to operate the mouse, type text, and manage windows in i3 without needing a conventional keyboard or mouse.
+A gamepad-driven interface for controlling a Linux desktop using an **8BitDo Ultimate 2 Wireless Controller**. The goal is to operate the mouse, type text, and manage windows in i3 without needing a conventional keyboard or mouse.
 
 The project is inspired by ergonomic computing, alternative keyboard layouts, and rethinking how we interact with computers.
 
@@ -18,11 +18,22 @@ The project is inspired by ergonomic computing, alternative keyboard layouts, an
 - **Operating system:** Arch Linux
 - **Window system:** X11
 - **Window manager:** i3
-- **Controller:** 8BitDo Pro 3
+- **Controller:** 8BitDo Ultimate 2 Wireless Controller
 - **Connection:** Controller communicates wirelessly with its 2.4 GHz receiver, which is connected to the computer through a USB dock.
 - **Implementation language:** Python (proposed)
 
-The exact controller input interface, button indices, and input-injection backend still need to be verified on the target machine.
+The controller input interface has been inspected; the input-injection backend still needs to be selected.
+
+### Controller hardware diagnostics
+
+- **USB ID:** `2dc8:310b`
+- **Linux interfaces:** `/dev/input/event26`, `js0` (observed event device)
+- **Stick axes:** `ABS_X`, `ABS_Y` (left); `ABS_RX`, `ABS_RY` (right), approximately −32768 to +32767.
+- **Triggers:** `ABS_Z`, `ABS_RZ`, 0–255.
+- **D-pad:** `ABS_HAT0X`, `ABS_HAT0Y`, −1 to +1.
+- **Buttons:** `BTN_SOUTH`, `BTN_EAST`, `BTN_NORTH`, `BTN_WEST` (face buttons); `BTN_TL`, `BTN_TR` (shoulders); `BTN_SELECT`, `BTN_START`; `BTN_THUMBL`, `BTN_THUMBR` (stick clicks); `BTN_MODE` (guide/mode button).
+- Face buttons, D-pad, shoulders, triggers, and guide button produced events. Clicking L3/R3 also caused small, noisy changes on the corresponding stick axes.
+- The physical face-button label mapping and Start/Select presses remain unverified; the complete button mapping has not been confirmed.
 
 ## Interaction Model
 
